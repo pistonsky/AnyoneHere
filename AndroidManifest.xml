@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.pistonsky.anyonehere"
-    android:versionCode="1"
-    android:versionName="0.0.1" >
+    android:versionCode="4"
+    android:versionName="0.0.4" >
 
     <uses-sdk
         android:minSdkVersion="11"
         android:targetSdkVersion="18" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    
 
     <application
         android:allowBackup="true"
@@ -22,6 +26,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <service android:name="com.pistonsky.anyonehere.CloudService" />
+
         <activity
             android:name="com.pistonsky.anyonehere.ItemDetailActivity"
             android:label="@string/title_item_detail"
@@ -29,6 +36,10 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ItemListActivity" />
+        </activity>
+        <activity
+            android:name="com.pistonsky.anyonehere.PostActivity"
+            android:label="@string/title_activity_post" >
         </activity>
     </application>
 

@@ -33,6 +33,9 @@ public class ItemListActivity extends FragmentActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
+        this.startService(new Intent(this, CloudService.class)); // connect to server and listen for messages
+        
         setContentView(R.layout.activity_item_list);
 
         if (findViewById(R.id.item_detail_container) != null) {
@@ -71,11 +74,9 @@ public class ItemListActivity extends FragmentActivity
                     .commit();
 
         } else {
-            // In single-pane mode, simply start the detail activity
-            // for the selected item ID.
-            Intent detailIntent = new Intent(this, ItemDetailActivity.class);
-            detailIntent.putExtra(ItemDetailFragment.ARG_ITEM_ID, id);
-            startActivity(detailIntent);
+            // start the posing activity - show user post-a-new-message form
+            Intent postIntent = new Intent(this, PostActivity.class);
+            startActivity(postIntent);
         }
     }
 }

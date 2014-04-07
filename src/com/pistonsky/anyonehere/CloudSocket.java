@@ -24,7 +24,7 @@ public class CloudSocket extends AsyncTask<CloudData, Integer, Integer> {
 
 	private final String TAG = "CloudSocket";
 	public static final String BROADCAST_SEND_MESSAGE = "SEND";
-	public static final String BROADCAST_TERMINATE = "LynksSocket.TERMINATE";
+	public static final String BROADCAST_TERMINATE = "CloudSocket.TERMINATE";
 	/**
 	 * The time given to receive data from socket, needed for AsyncTask termination purpose
 	 */
@@ -32,7 +32,7 @@ public class CloudSocket extends AsyncTask<CloudData, Integer, Integer> {
 	/**
 	 * Time given to connect the socket
 	 */
-	private static final int CONNECT_TIMEOUT = 2000; // 2 seconds
+	private static final int CONNECT_TIMEOUT = 3000; // 3 seconds
 	private Socket socket;
 	private Context context;
 	private Handler threadHandler;
@@ -66,9 +66,9 @@ public class CloudSocket extends AsyncTask<CloudData, Integer, Integer> {
 		int interval = 1000;
 		while (!isCancelled()) {
 			try {
-				Log.i(TAG, "Trying to create new Socket on pistonsky.jelasticloud.com/server.php:8099...");
+				Log.i(TAG, "Trying to create new Socket on 80.78.247.202:8099...");
 				socket = new Socket();
-				socket.connect(new InetSocketAddress("pistonsky.jelasticloud.com/server.php", 8099), CloudSocket.CONNECT_TIMEOUT);
+				socket.connect(new InetSocketAddress("80.78.247.202", 8099), CloudSocket.CONNECT_TIMEOUT);
 				socket.setSoTimeout(CloudSocket.READ_TIMEOUT); // 2 seconds read timeout
 				interval = 1000; // reset
 				App.socket = socket;
@@ -101,6 +101,7 @@ public class CloudSocket extends AsyncTask<CloudData, Integer, Integer> {
 							socket = null;
 						}
 					} catch (InterruptedIOException e) {
+						e.printStackTrace();
 						Log.e(TAG, "Socket timed out while receiving data.");
 					} catch (IOException e) {
 						e.printStackTrace();

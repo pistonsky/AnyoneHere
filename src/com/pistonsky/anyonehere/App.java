@@ -2,6 +2,7 @@ package com.pistonsky.anyonehere;
 
 import java.net.Socket;
 import java.util.AbstractQueue;
+import java.util.UUID;
 import java.util.concurrent.ArrayBlockingQueue;
 
 import android.app.Application;
@@ -24,5 +25,9 @@ public class App extends Application {
 	 * messages waiting to be sent to the server
 	 */
 	public static AbstractQueue<String> SOCKET_MESSAGES = new ArrayBlockingQueue<String>(32);
+	
+	public String getMsgId() {
+		return UUID.randomUUID().toString();
+	}
 	
 }
