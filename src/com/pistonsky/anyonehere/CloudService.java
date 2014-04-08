@@ -12,6 +12,10 @@ import android.os.Message;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
+import com.google.gson.reflect.TypeToken;
+
 public class CloudService extends Service {
 	
 	private final String TAG = "CloudService";
@@ -29,7 +33,23 @@ public class CloudService extends Service {
                 break;
 
             case App.CODE_SOCKET_SERVER_ANSWER:
-            	// server has answered, need to process the answer here
+            	Gson gson = new Gson();
+            	try {
+            		Type serverMessageType = new TypeToken<ServerMessage>(){}.getType();
+            		ServerMessage message = gson.fromJson((String)msg.obj, serverMessageType);
+            		Intent intent = new Intent();
+                	if (message.data != null) {
+                		for (Map.Entry<String, String> entry : message.data.entrySet()) {
+                			intent.putExtra(entry.getKey(), entry.getValue());
+                		}
+                		App app = ((App)getApplicationContext());
+                		app.onMessage(app, intent);
+                	} else {
+                		// TODO: we have an ack message
+                	}
+            	} catch (JsonSyntaxException e) {
+            		Log.e(TAG, "There is JsonSyntaxException.");
+            	}
             	
                 break;
 

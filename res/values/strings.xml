@@ -8,4 +8,19 @@
     <string name="hello_world">Hello world!</string>
     <string name="post_button">Post</string>
 
+    <!-- Strings related to login -->
+    <string name="prompt_login">Username</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="action_switch_account">Switch Account</string>
+    <string name="action_forgot_password">Recover lost password</string>
+    <string name="action_quit">Quit</string>
+    <string name="login_progress_signing_in">Signing in&#8230;</string>
+    <string name="error_short_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_incorrect_login">This username does not exist</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="error_timeout">There is no connection</string>
+    <string name="save_password">Save password</string>
+    
 </resources>

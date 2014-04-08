@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Intent;
 import android.content.IntentSender;
+import android.content.SharedPreferences;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
@@ -131,6 +132,10 @@ public class PostActivity extends Activity implements
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
+		SharedPreferences state = getSharedPreferences(App.SHARED_PREFERENCES,0);
+		setTitle(state.getString("logged_in_as", "Who's Around?"));
+		
 		setContentView(R.layout.activity_post);
 		
 		findViewById(R.id.post_button).setOnClickListener(
